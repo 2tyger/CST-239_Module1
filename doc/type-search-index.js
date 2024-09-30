@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"forSale","l":"ShoppingCart"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"forSale","l":"Armor"},{"p":"forSale","l":"Health"},{"p":"forSale","l":"InventoryManager"},{"p":"forSale","l":"SalableProduct"},{"p":"forSale","l":"ShoppingCart"},{"p":"forSale","l":"StoreApp"},{"p":"forSale","l":"Storefront"},{"p":"forSale","l":"Weapon"}];updateSearchResults();

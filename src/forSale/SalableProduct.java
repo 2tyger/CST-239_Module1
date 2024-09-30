@@ -4,6 +4,7 @@ package forSale;
  */
 public class SalableProduct {
 	// Instance variables with associated product details
+	private String sku;
 	private String name;
 	private String description;
 	private double price;
@@ -11,16 +12,26 @@ public class SalableProduct {
 	
 	/**
 	 * Constructor that initializes new product
+	 * @param sku			Product sku
 	 * @param name			Product name
 	 * @param description	Product description
 	 * @param price			Product price
 	 * @param quantity		Product quantity
 	 */
-	public SalableProduct(String name, String description, double price, int quantity) {
+	public SalableProduct(String sku, String name, String description, double price, int quantity) {
+		this.sku = sku;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.quantity = quantity;
+	}
+	
+	/**
+	 * Getter that returns product price
+	 * @return Returns product price
+	 */
+	public String getSKU() {
+		return sku;
 	}
 	
 	/**
@@ -55,4 +66,11 @@ public class SalableProduct {
 		return quantity;
 	}
 	
+	/**
+	 * Getter that returns entire salable item as a string
+	 * @return returns salable item as string
+	 */
+	public String getItem() {
+		return sku + " - " + name + ", " + description + " - " + price + ", " + quantity;
+	}
 }
