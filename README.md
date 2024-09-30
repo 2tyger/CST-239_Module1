@@ -4,6 +4,10 @@
 
 https://github.com/2tyger/CST-239_Module1
 
-## VIDEO URL
+## MILESTONE 1 VIDEO URL
 
 https://www.youtube.com/watch?v=xozvetWwb5s
+
+# MILESTONE 2 VIDEO URL
+
+https://youtu.be/bqAjyw2tTnA

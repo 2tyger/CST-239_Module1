@@ -37,12 +37,6 @@ public class Storefront {
 	public void purchaseProduct(SalableProduct product, int quantity) {
 		shoppingCart.addToCart(product, quantity);
 	}
-	/**
-	 * Cancel purchase by clearing cart
-	 */
-	public void cancelPurchase() {
-		shoppingCart.clearCart();
-	}
 	
 	/**
 	 * List products available
@@ -90,7 +84,6 @@ public class Storefront {
 		} catch(InputMismatchException e) {
 			System.out.println("Invalid input. Please enter a valid SKU.");
 		}
-		scanner.close();
 	}
 	
 	/**
