@@ -11,3 +11,7 @@ https://www.youtube.com/watch?v=xozvetWwb5s
 # MILESTONE 2 VIDEO URL
 
 https://youtu.be/bqAjyw2tTnA
+
+# MILESTONE 3 VIDEO URL
+
+https://youtu.be/TJzHaQBlFQ8

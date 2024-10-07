@@ -9,12 +9,15 @@ import java.util.List;
  */
 public class ShoppingCart {
 	private List<SalableProduct> cartItems;
+	private InventoryManager inventoryManager;
 	
 	/**
-	 * Constructor for empty Shopping Cart
+	 * Shopping Cart
+	 * @param inventoryManager inventoryManager
 	 */
-	public ShoppingCart() {
+	public ShoppingCart(InventoryManager inventoryManager) {
 		this.cartItems = new ArrayList<>();
+		this.inventoryManager = inventoryManager;
 	}
 	/**
 	 * Adds items to cart
@@ -23,14 +26,12 @@ public class ShoppingCart {
 	 */
 	public void addToCart(SalableProduct product, int quantity) {
 		// Check to make sure product has enough stock
-		if (product.getQuantity() >= quantity) {
-			// Add quantity of product to cart
+		if (inventoryManager.removeProduct(product, quantity)) {
 			cartItems.add(new SalableProduct(product.getSKU(), product.getName(), product.getDescription(), product.getPrice(), quantity));
 			System.out.println("Item " + product.getName() + " has been added to cart!");
 		} else {
 			System.out.println("Stock is insufficent... " + product.getName() + " does not have enough stock.");
 		}
-	
 	}
 	/**
 	 * Removes product from Shopping Cart
@@ -43,7 +44,11 @@ public class ShoppingCart {
 	 * Clears items in cart
 	 */
 	public void clearCart() {
+		for (SalableProduct product : cartItems) {
+			inventoryManager.addProduct(product,  product.getQuantity());
+		}
 		cartItems.clear(); // Clear items in the cart
+		System.out.println("Cart has been cleared... inventory replenished.");
 	}
 	
 	/**

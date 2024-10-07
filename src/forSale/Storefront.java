@@ -11,23 +11,28 @@ import java.util.Scanner;
 public class Storefront {
 	// ShoppingCart
 	private ShoppingCart shoppingCart;
+	private InventoryManager inventoryManager;
 	private List<SalableProduct> products;
+	
 	/**
 	 * Constructor to initialize cart
 	 */
 	public Storefront() {
-		this.shoppingCart = new ShoppingCart();
+		this.inventoryManager = new InventoryManager();
+		this.shoppingCart = new ShoppingCart(inventoryManager);
 	}
 	/**
 	 * Initialize store and list of products
 	 */
 	public void initalizeStore() {
 		this.products = new ArrayList<>();
-		products.add(new Weapon("W-001", "Small Gun", "pew! pew!", 99.99, 10, "SMALL"));
+		products.add(new Weapon("W-001", "Small Gun", "pew! pew!", 99.99, 2, "SMALL"));
 		products.add(new Weapon("W-002", "Big Gun", "BANG! BANG!", 199.99, 5, "BIG"));
 		products.add(new Armor("A-001", "Chestplate", "Might hurt your shoulders but it'll protect your heart.", 249.99, 3, "Iron"));
 		products.add(new Armor("A-002", "Leggings", "Break a leg... or don't.", 149.99, 3, "Diamond"));
 		products.add(new Health("H-001", "Bandage", "Let's wrap this up.", 9.99, 40, "SMALL"));
+		
+		inventoryManager.initializeInventory(products);
 	}
 	/**
 	 * Purchase product by adding to cart
@@ -36,24 +41,24 @@ public class Storefront {
 	 */
 	public void purchaseProduct(SalableProduct product, int quantity) {
 		shoppingCart.addToCart(product, quantity);
+		inventoryManager.removeProduct(product, quantity);
+	}
+	
+	/**
+	 * Cancel Purchase
+	 * @param product Product
+	 * @param quantity Quantity being added back to inventory
+	 */
+	public void cancelPurchase(SalableProduct product, int quantity) {
+		inventoryManager.addProduct(product, quantity);
 	}
 	
 	/**
 	 * List products available
 	 */
 	public void productList() {
-		for (Object salableProduct: products) {
-			 if (salableProduct instanceof Weapon) {
-				 System.out.println(((Weapon) salableProduct).getItem());
-			 }
-			 
-			 else if (salableProduct instanceof Armor) {
-				 System.out.println(((Armor) salableProduct).getItem());
-			 }
-			 
-			 else if (salableProduct instanceof Health) {
-				 System.out.println(((Health) salableProduct).getItem());
-			 }
+		for (SalableProduct product : inventoryManager.getInventory()) {
+			System.out.println(product.getItem());
 		}
 	}
 	

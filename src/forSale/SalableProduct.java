@@ -67,6 +67,14 @@ public class SalableProduct {
 	}
 	
 	/**
+	 * Setter that sets quantity
+	 * @param quantity quantity
+	 */
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	
+	/**
 	 * Getter that returns entire salable item as a string
 	 * @return returns salable item as string
 	 */
