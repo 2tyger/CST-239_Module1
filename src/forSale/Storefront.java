@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Storefront class
@@ -25,12 +29,49 @@ public class Storefront {
 	 * Initialize store and list of products
 	 */
 	public void initalizeStore() {
+        ObjectMapper objectMapper = new ObjectMapper();
 		this.products = new ArrayList<>();
-		products.add(new Weapon("W-001", "Small Gun", "pew! pew!", 99.99, 2, "SMALL"));
-		products.add(new Weapon("W-002", "Big Gun", "BANG! BANG!", 199.99, 5, "BIG"));
-		products.add(new Armor("A-001", "Chestplate", "Might hurt your shoulders but it'll protect your heart.", 249.99, 3, "Iron"));
-		products.add(new Armor("A-002", "Leggings", "Break a leg... or don't.", 149.99, 3, "Diamond"));
-		products.add(new Health("H-001", "Bandage", "Let's wrap this up.", 9.99, 40, "SMALL"));
+		
+        try {
+        	
+            // Parse the JSON file into a JsonNode array
+            JsonNode root = objectMapper.readTree(new File("src/inventory.json"));
+
+            // Loop through the JSON array
+            for (JsonNode node : root) {
+                String type = node.get("type").asText(); // Get the product type
+                String name = node.get("name").asText();
+                double price = node.get("price").asDouble();
+                String sku = node.get("sku").asText();
+                String description = node.get("description").asText();
+                int quantity = node.get("quantity").asInt();
+
+                // Determine the subclass based on the type field
+                switch (type) {
+                    case "Weapon":
+                    	String size = node.get("size").asText();
+                    	products.add(new Weapon(sku, name, description, price, quantity, size));
+                        break;
+                    case "Armor":
+                    	String material = node.get("material").asText();
+                    	products.add(new Weapon(sku, name, description, price, quantity, material));
+                        break;
+                    case "Health":
+                    	String hitpoints = node.get("hitpoints").asText();
+                    	products.add(new Weapon(sku, name, description, price, quantity, hitpoints));
+                    	break;
+                    default:
+                        System.out.println("Unknown product type: " + type);
+                }
+            }
+			//products.add(new Weapon("W-002", "Big Gun", "BANG! BANG!", 199.99, 5, "BIG"));
+			//products.add(new Armor("A-001", "Chestplate", "Might hurt your shoulders but it'll protect your heart.", 249.99, 3, "Iron"));
+			//products.add(new Armor("A-002", "Leggings", "Break a leg... or don't.", 149.99, 3, "Diamond"));
+			//products.add(new Health("H-001", "Bandage", "Let's wrap this up.", 9.99, 40, "SMALL"));
+        } catch (IOException e) {
+        	System.out.println("I/O Error.");
+        	e.printStackTrace();
+        }
 		
 		inventoryManager.initializeInventory(products);
 	}

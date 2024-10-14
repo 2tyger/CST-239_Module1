@@ -1,0 +1,47 @@
+[
+	{
+		"sku": "W-001",
+		"name": "Small Gun",
+		"description": "pew! pew!",
+		"price": 99.99,
+		"quantity": 2,
+		"type": "Weapon",
+		"size": "SMALL"
+	},
+	{
+		"sku": "W-002",
+		"name": "Big Gun",
+		"description": "BANG! BANG!",
+		"price": 199.99,
+		"quantity": 5,
+		"type": "Weapon",
+		"size": "BIG"
+	},
+	{
+		"sku": "A-001",
+		"name": "Chestplate",
+		"description": "Might hurt your shoulders but it'll protect your heart.",
+		"price": 249.99,
+		"quantity": 3,
+		"type": "Armor",
+		"material": "Iron"
+	},
+	{
+		"sku": "A-002",
+		"name": "Leggings",
+		"description": "Break a leg... or don't.",
+		"price": 149.99,
+		"quantity": 3,
+		"type": "Armor",
+		"material": "Diamond"
+	},
+	{
+		"sku": "H-001",
+		"name": "Bandage",
+		"description": "Let's wrap this up.",
+		"price": 9.99,
+		"quantity": 40,
+		"type": "Health",
+		"hitpoints": "SMALL"
+	}
+]
