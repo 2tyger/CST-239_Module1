@@ -2,7 +2,7 @@ package forSale;
 /**
  * Salable product class
  */
-public class SalableProduct {
+public class SalableProduct implements Comparable<SalableProduct> {
 	// Instance variables with associated product details
 	private String sku;
 	private String name;
@@ -80,5 +80,17 @@ public class SalableProduct {
 	 */
 	public String getItem() {
 		return sku + " - " + name + ", " + description + " - " + price + ", " + quantity;
+	}
+	
+	@Override
+	public int compareTo(SalableProduct other) {
+		// compare by name
+		int nameComparison = this.name.compareTo(other.name);
+		if (nameComparison != 0) {
+			return nameComparison;
+		}
+		
+		// if name is equal, compare by price
+		return Double.compare(this.price, other.price);
 	}
 }

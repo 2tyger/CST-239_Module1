@@ -140,46 +140,76 @@ public class Storefront {
 		Scanner scanner = new Scanner(System.in);
 		
 		do {
-			try {
-				System.out.println("~ Welcome to Ty's Shop ~");
-				System.out.println("1 - List Products, 2 - Add Item to Cart, 3 - List Cart, 4 - Clear Cart, 5 - Purchase Cart, 6 - LEAVE");
-				System.out.print("~ Select Option: ");
-		
-				userInput = scanner.nextInt();
-	
+			System.out.println("~ Welcome to Ty's Shop ~");
+			System.out.println("1 - List Products, 2 - Add Item to Cart, 3 - List Cart, 4 - Clear Cart, 5 - Purchase Cart, 6 - Sort Products, 7 - LEAVE");
+			System.out.print("~ Select Option: ");
+			userInput = scanner.nextInt();
+			
+			System.out.println("");
+			
+			switch (userInput) {
+			case 1:
+				productList();
 				System.out.println("");
-				
-				switch (userInput) {
-					case 1:
-						productList();
-						break;
-					case 2:
-						productAdd();
-						break;
-					case 3:
-						shoppingCart.cartList();
-						break;
-					case 4:
-						shoppingCart.clearCart();
-						break;
-					case 5:
-						shoppingCart.purchaseCart();
-						break;
-					case 6:
-						System.out.println("Thanks for coming, see you soon!");
-						scanner.close();
-						System.exit(0);
-					default:
-						System.out.println("Invalid input. Please enter a valid number (1-6).");
-						break;
-				}
-				
+				break;
+			case 2:
+				productAdd();
 				System.out.println("");
-			} catch(InputMismatchException e) {
-				System.out.println("\nInvalid input. Please enter a valid number (1-6).\n");
-				scanner.next();
+				break;
+			case 3:
+				shoppingCart.cartList();
+				System.out.println("");
+				break;
+			case 4:
+				shoppingCart.clearCart();
+				System.out.println("");
+				break;
+			case 5:
+				shoppingCart.purchaseCart();
+				System.out.println("");
+				break;
+			case 6:
+				sortOptions();
+				break;
+			case 7:
+				System.out.println("Thanks for coming, see you soon!");
+				scanner.close();
+				System.exit(0);
+			default:
+				System.out.println("Invalid input. Please enter a valid number (1-6).");
+				System.out.println("");
+				break;
+				
 			}
-		} while(true);
+		} while (true);
+	}
+	
+	/**
+	 * Sort Displayed Products
+	 */
+	private void sortOptions() {
+		Scanner scanner = new Scanner(System.in);
+
+		System.out.println("1 - Sort by Name AND Price, 2 - Sort by Price ONLY");
+		System.out.print("~ Select Option: ");
 		
+		int sortInput = scanner.nextInt();
+		
+		System.out.println("");
+		System.out.println("1 - Ascending, 2 - Descending");
+		System.out.print("~ Select Option: ");
+		
+		boolean descending = scanner.nextInt() == 2;
+		
+		System.out.println("");
+		
+		if (sortInput == 1) {
+			inventoryManager.sortInventoryByNameAndPrice(descending);
+		} else {
+			inventoryManager.sortInventoryByPrice(descending);
+		}
+		
+		productList(); // list sorted products
+		System.out.println("");
 	}
 }
