@@ -53,4 +53,14 @@ public class Armor extends SalableProduct {
 		
 		return item;
 	}
+	
+	@Override
+	public String getItemJSON() {
+		String item;
+		
+		item = super.getItem();
+		item += ", \"material\": \"" + material + "\"";
+		
+		return item;
+	}
 }

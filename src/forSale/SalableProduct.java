@@ -82,6 +82,14 @@ public class SalableProduct implements Comparable<SalableProduct> {
 		return sku + " - " + name + ", " + description + " - " + price + ", " + quantity;
 	}
 	
+	/**
+	 * Getter that returns entire salable item as a JSON string
+	 * @return returns salable item as string
+	 */
+	public String getItemJSON() {
+		return "\"sku\": \"" + sku + "\"," + "\"name\": \"" + name + "\"," + "\"description\": \"" + description + "\"," + "\"price\": " + price + "," + "\"quantity\": " + quantity + "";
+	}
+	
 	@Override
 	public int compareTo(SalableProduct other) {
 		// compare by name

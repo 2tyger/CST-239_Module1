@@ -21,12 +21,13 @@ public class Storefront {
 	/**
 	 * Constructor to initialize cart
 	 */
-	public Storefront() {
-		this.inventoryManager = new InventoryManager();
+	public Storefront(InventoryManager inventoryManager) {
+		this.inventoryManager = inventoryManager;
 		this.shoppingCart = new ShoppingCart(inventoryManager);
 	}
 	/**
 	 * Initialize store and list of products
+	 * @throws IOException 
 	 */
 	public void initalizeStore() {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -73,7 +74,7 @@ public class Storefront {
         	e.printStackTrace();
         }
 		
-		inventoryManager.initializeInventory(products);
+        inventoryManager.initializeInventory(products);
 	}
 	/**
 	 * Purchase product by adding to cart

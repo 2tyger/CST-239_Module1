@@ -23,3 +23,7 @@ https://youtu.be/lkB_271HxOw
 # MILESTONE 5 VIDEO URL
 
 https://youtu.be/99BspCvIcEQ
+
+# MILESTONE 6 VIDEO URL
+
+https://youtu.be/aIqb5Ki4SpE

@@ -53,4 +53,14 @@ public class Health extends SalableProduct {
 		
 		return item;
 	}
+	
+	@Override
+	public String getItemJSON() {
+		String item;
+		
+		item = super.getItem();
+		item += ", \"hitpoints\": \"" + hitpoints + "\"";
+		
+		return item;
+	}
 }

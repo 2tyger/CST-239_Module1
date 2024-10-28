@@ -9,8 +9,17 @@ public class StoreApp {
 	 * @param args Main method
 	 */
 	public static void main(String[] args) {
-		Storefront storefront = new Storefront();
+		InventoryManager sharedInventoryManager = new InventoryManager();
+
+        // Pass shared InventoryManager instance to both Storefront and AdminThread
+        Storefront storefront = new Storefront(sharedInventoryManager);
+        AdminThread adminThread = new AdminThread(sharedInventoryManager);
+    
+        // start admin service thread
+		adminThread.start();
+        
 		storefront.initalizeStore();
 		storefront.startScreen();
+		
 	}
 }
