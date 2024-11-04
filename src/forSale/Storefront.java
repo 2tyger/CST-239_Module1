@@ -17,6 +17,7 @@ public class Storefront {
 	private ShoppingCart shoppingCart;
 	private InventoryManager inventoryManager;
 	private List<SalableProduct> products;
+	private Scanner scanner;
 	
 	/**
 	 * Constructor to initialize cart
@@ -24,6 +25,7 @@ public class Storefront {
 	public Storefront(InventoryManager inventoryManager) {
 		this.inventoryManager = inventoryManager;
 		this.shoppingCart = new ShoppingCart(inventoryManager);
+		this.scanner = new Scanner(System.in);
 	}
 	/**
 	 * Initialize store and list of products
@@ -139,7 +141,6 @@ public class Storefront {
 			System.out.println("Invalid input. Please enter a valid SKU.");
 		}
 		
-		scanner.close();
 		return itemAdded;
 	}
 	
@@ -184,7 +185,6 @@ public class Storefront {
 				break;
 			case 7:
 				System.out.println("Thanks for coming, see you soon!");
-				scanner.close();
 				System.exit(0);
 			default:
 				System.out.println("Invalid input. Please enter a valid number (1-6).");
@@ -215,6 +215,18 @@ public class Storefront {
 		System.out.println("");
 		
 		if (sortInput == 1) {
+            inventoryManager.sortInventoryByNameAndPrice(descending);
+        } else if (sortInput == 2) {
+            inventoryManager.sortInventoryByPrice(descending);
+        } else {
+            System.out.println("Invalid sort option.");
+            return;
+        }
+
+        productList(); // List sorted products
+        System.out.println("");
+		
+		if (sortInput == 1) {
 			inventoryManager.sortInventoryByNameAndPrice(descending);
 		} else {
 			inventoryManager.sortInventoryByPrice(descending);
@@ -222,5 +234,7 @@ public class Storefront {
 		
 		productList(); // list sorted products
 		System.out.println("");
+		
+	
 	}
 }

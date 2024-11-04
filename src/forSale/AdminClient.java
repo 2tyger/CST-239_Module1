@@ -58,34 +58,32 @@ public class AdminClient {
 	 */
 	public static void main(String[] args) throws IOException, InterruptedException {
 		AdminClient adminClient = new AdminClient();
-		adminClient.start("127.0.0.1", 7777);
-		
-		String serverResponse;
-		
-		Scanner scanner = new Scanner(System.in);
-		try {
-			while (true) {
-				System.out.println("Enter command ( U - Update, R - Retrieve ): ");
-				String command = scanner.nextLine().toUpperCase();
-				
-				if (command.equals("U")) {
-					System.out.println("Enter a JSON string of Salable Products: ");
-					String jsonPayload = scanner.nextLine();
-					
-					serverResponse = adminClient.sendMessage("JSON" + jsonPayload);
-				} else if (command.equals("R")) {
-					serverResponse = adminClient.sendMessage("GETJSON");
-					System.out.println(serverResponse);
-				} else {
-					System.out.println("Invalid / unknown command");
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		adminClient.cleanup();
+	    adminClient.start("127.0.0.1", 7777);
 
+	    String serverResponse;
+
+	    // Reuse the same Scanner instance for the entire method
+	    try (Scanner scanner = new Scanner(System.in)) {
+	        while (true) {
+	            System.out.println("Enter command ( U - Update, R - Retrieve ): ");
+	            String command = scanner.nextLine().toUpperCase();
+
+	            if (command.equals("U")) {
+	                System.out.println("Enter a JSON string of Salable Products: ");
+	                String jsonPayload = scanner.nextLine();
+
+	                serverResponse = adminClient.sendMessage("JSON" + jsonPayload);
+	            } else if (command.equals("R")) {
+	                serverResponse = adminClient.sendMessage("GETJSON");
+	                System.out.println(serverResponse);
+	            } else {
+	                System.out.println("Invalid / unknown command");
+	            }
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        adminClient.cleanup();
+	    }
 	}
-
 }
