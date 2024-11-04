@@ -107,16 +107,23 @@ public class Storefront {
 	/**
 	 * Add product to cart
 	 */
-	public void productAdd() {
+	public boolean productAdd() {
+		return productAdd("");
+	}
+	public boolean productAdd(String sku) {
 		String userInput;
 		Scanner scanner = new Scanner(System.in);
+		boolean itemAdded = false;
 		
-		System.out.print("ENTER SKU: ");
+		// ask for sku if null, e.g. not passed to method
+		if (sku == "") {
+			System.out.print("ENTER SKU: ");
+			userInput = scanner.nextLine();
+	    } else {
+	    	userInput = sku;
+	    }
 		
 		try {
-			userInput = scanner.nextLine();
-			boolean itemAdded = false;
-			
 			for (Object salableProduct: products) {
 				String curSKU = ((SalableProduct) salableProduct).getSKU();
 				if (curSKU.equals(userInput)) {
@@ -131,6 +138,9 @@ public class Storefront {
 		} catch(InputMismatchException e) {
 			System.out.println("Invalid input. Please enter a valid SKU.");
 		}
+		
+		scanner.close();
+		return itemAdded;
 	}
 	
 	/**
